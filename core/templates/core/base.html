@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}AnJer DjangoChat App</title>
+
+    {% load bootstrap5 %}   <!--tells Django that it should load the Bootstrap 5 module in this template.-->
+    {% bootstrap_css %}     <!--serts the <link> element with the referral to the bootstrap stylesheet. -->
+    {% bootstrap_javascript %} <!--inserts the <script> element with the referral to the necessary javascript file.-->
+        
+    <style>
+        .chat-messages{
+            height: 50vh;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="bg-primary">
+    <nav class="navbar navbar-expand-sm navabar-dark bg-dark">
+        <div class="container-fluid ">
+            <a class="navbar-brand mb-2 " href="/" >AnJerApp</a>
+            <button class="navbar-toggler bg-primary" type="button" data-bs-toggle="collapse" 
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+            aria-expanded="false" aria-label="Toggle-navigation">
+                <span class="navbar-toggler-icon "></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item"><a href="/rooms/" class="nav-link">Rooms</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Location</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Playgame</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/logout/">Logout</a></li>
+                    {% else %}
+                    <li class="nav-item"><a class="nav-link" href="/login/">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/signup/">SignUp</a></li>
+                    {% endif %}
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="text" placeholder="search" aria-label="Search">
+                    <button class="btn btn-primary" type="button">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    
+
+    {% block content %}
+    {% endblock%}
+
+    {% block scripts %}
+    {% endblock%}
+</body>
+    
+</html>

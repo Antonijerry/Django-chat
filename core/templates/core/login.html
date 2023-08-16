@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %}
+
+{% block title %} Log In | {% endblock%}
+
+{% block content %}
+<div class="p-5 text-center">
+    <h1 class="text-light">Log In</h1>
+</div>
+
+<form method="post" action="." class="mx-auto">
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <label for="" class="text-light">Username</label>
+        <input type="text" name="username" class="mt-2">
+    </div>
+    <div class="mb-3">
+        <label for="" class="text-light">Password</label>
+        <input type="password" name="password" class="mt-2">
+    </div>
+    
+
+<!-- to check for errors -->
+
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="text-light bg-danger">
+                <p>{{ error|escape }}</p>
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+
+<button class="btn btn-success">Log in</button>
+</form>
+
+{% endblock %}
